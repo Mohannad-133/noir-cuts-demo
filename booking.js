@@ -1,3 +1,16 @@
+// ======================================================
+// NOIR CUTS – BOOKING SYSTEM
+// Verbindung zur gemeinsamen Supabase-Datenbank
+// ======================================================
+
+const BOOKING_API =
+    "https://rpggtehaywhrrapdgpre.supabase.co/functions/v1/booking-api";
+
+
+// ======================================================
+// SERVICES
+// ======================================================
+
 const services = {
 
     classic: {
@@ -27,17 +40,9 @@ const services = {
 };
 
 
-const openingHours = {
-
-    1: { start: "10:00", end: "19:00" },
-    2: { start: "10:00", end: "19:00" },
-    3: { start: "10:00", end: "19:00" },
-    4: { start: "10:00", end: "20:00" },
-    5: { start: "10:00", end: "20:00" },
-    6: { start: "10:00", end: "18:00" }
-
-};
-
+// ======================================================
+// HTML-ELEMENTE
+// ======================================================
 
 const serviceSelect =
     document.getElementById("service");
@@ -60,25 +65,47 @@ const bookingSuccess =
 const successText =
     document.getElementById("successText");
 
+const customerName =
+    document.getElementById("customerName");
+
+const customerEmail =
+    document.getElementById("customerEmail");
+
+const customerPhone =
+    document.getElementById("customerPhone");
+
 
 let selectedTime = null;
 
 
+// ======================================================
+// DATUM EINSTELLEN
+// Heute bis maximal 30 Tage im Voraus
+// ======================================================
 
-// HEUTIGES DATUM ALS MINIMUM
+function formatDateForInput(date) {
+
+    const year =
+        date.getFullYear();
+
+    const month =
+        String(date.getMonth() + 1)
+            .padStart(2, "0");
+
+    const day =
+        String(date.getDate())
+            .padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+}
+
 
 const today =
     new Date();
 
-const todayString =
-    today.toISOString().split("T")[0];
-
 bookingDate.min =
-    todayString;
+    formatDateForInput(today);
 
-
-
-// MAXIMAL 30 TAGE IM VORAUS
 
 const maxDate =
     new Date();
@@ -88,118 +115,30 @@ maxDate.setDate(
 );
 
 bookingDate.max =
-    maxDate
-        .toISOString()
-        .split("T")[0];
+    formatDateForInput(maxDate);
 
 
+// ======================================================
+// VERFÜGBARE TERMINE LADEN
+// ======================================================
 
-// GESPEICHERTE BUCHUNGEN
+async function loadAvailableSlots() {
 
-function getBookings() {
-
-    return JSON.parse(
-        localStorage.getItem("noirBookings")
-    ) || [];
-
-}
-
-
-function saveBookings(bookings) {
-
-    localStorage.setItem(
-        "noirBookings",
-        JSON.stringify(bookings)
-    );
-
-}
-
-
-
-// ZEIT IN MINUTEN UMWANDELN
-
-function timeToMinutes(time) {
-
-    const [hours, minutes] =
-        time
-            .split(":")
-            .map(Number);
-
-    return hours * 60 + minutes;
-
-}
-
-
-function minutesToTime(minutes) {
-
-    const hours =
-        Math.floor(minutes / 60);
-
-    const mins =
-        minutes % 60;
-
-    return (
-        String(hours).padStart(2, "0")
-        +
-        ":"
-        +
-        String(mins).padStart(2, "0")
-    );
-
-}
-
-
-
-// ÜBERSCHNEIDUNG PRÜFEN
-
-function overlaps(
-    start,
-    duration,
-    booking
-) {
-
-    const startA =
-        timeToMinutes(start);
-
-    const endA =
-        startA + duration;
-
-    const startB =
-        timeToMinutes(booking.time);
-
-    const endB =
-        startB + booking.duration;
-
-    return (
-        startA < endB &&
-        endA > startB
-    );
-
-}
-
-
-
-// ZEITEN ERSTELLEN
-
-function renderTimeSlots() {
-
-    selectedTime =
-        null;
+    selectedTime = null;
 
     updateSummary();
 
 
-    const serviceKey =
+    const service =
         serviceSelect.value;
 
-    const dateValue =
+    const date =
         bookingDate.value;
 
 
-    if (
-        !serviceKey ||
-        !dateValue
-    ) {
+    // Noch nichts vollständig ausgewählt
+
+    if (!service || !date) {
 
         timeSlots.innerHTML =
             `
@@ -209,155 +148,171 @@ function renderTimeSlots() {
             `;
 
         return;
-
     }
 
 
-    const service =
-        services[serviceKey];
-
-
-    const date =
-        new Date(
-            dateValue + "T12:00:00"
-        );
-
-
-    const weekday =
-        date.getDay();
-
-
-    if (weekday === 0) {
-
-        timeSlots.innerHTML =
-            `
-            <p class="booking-placeholder">
-                Sonntags ist geschlossen.
-            </p>
-            `;
-
-        return;
-
-    }
-
-
-    const hours =
-        openingHours[weekday];
-
-
-    if (!hours) {
-        return;
-    }
-
-
-    const startMinutes =
-        timeToMinutes(hours.start);
-
-    const closingMinutes =
-        timeToMinutes(hours.end);
-
-
-    const bookings =
-        getBookings()
-            .filter(
-                booking =>
-                    booking.date === dateValue
-            );
-
+    // Während des Ladens anzeigen
 
     timeSlots.innerHTML =
-        "";
+        `
+        <p class="booking-placeholder">
+            Freie Termine werden geladen...
+        </p>
+        `;
 
 
-    for (
-        let current = startMinutes;
-        current + service.duration <= closingMinutes;
-        current += 30
-    ) {
+    try {
 
-        const time =
-            minutesToTime(current);
-
-
-        const unavailable =
-            bookings.some(
-                booking =>
-                    overlaps(
-                        time,
-                        service.duration,
-                        booking
-                    )
+        const response =
+            await fetch(
+                `${BOOKING_API}?date=${encodeURIComponent(date)}&service=${encodeURIComponent(service)}`
             );
 
 
-        const button =
-            document.createElement("button");
+        const data =
+            await response.json();
 
 
-        button.type =
-            "button";
+        if (!response.ok) {
 
-
-        button.className =
-            "time-slot";
-
-
-        button.textContent =
-            unavailable
-                ? `${time} · belegt`
-                : time;
-
-
-        if (unavailable) {
-
-            button.disabled =
-                true;
-
-            button.classList.add(
-                "unavailable"
+            throw new Error(
+                data.error ||
+                "Termine konnten nicht geladen werden."
             );
 
         }
 
 
-        button.addEventListener(
-            "click",
-            () => {
+        timeSlots.innerHTML = "";
 
-                document
-                    .querySelectorAll(".time-slot")
-                    .forEach(
-                        slot =>
-                            slot.classList.remove("selected")
-                    );
 
+        // Keine Termine an diesem Tag
+
+        if (
+            !data.slots ||
+            data.slots.length === 0
+        ) {
+
+            timeSlots.innerHTML =
+                `
+                <p class="booking-placeholder">
+                    Für diesen Tag sind keine Termine verfügbar.
+                </p>
+                `;
+
+            return;
+        }
+
+
+        // Einzelne Uhrzeiten erzeugen
+
+        data.slots.forEach(slot => {
+
+            const button =
+                document.createElement("button");
+
+
+            button.type =
+                "button";
+
+
+            button.className =
+                "time-slot";
+
+
+            // Frei oder belegt anzeigen
+
+            if (slot.available) {
+
+                button.textContent =
+                    slot.time;
+
+            } else {
+
+                button.textContent =
+                    `${slot.time} · belegt`;
+
+                button.disabled =
+                    true;
 
                 button.classList.add(
-                    "selected"
+                    "unavailable"
                 );
 
-
-                selectedTime =
-                    time;
+            }
 
 
-                updateSummary();
+            // Nur freie Termine anklickbar
+
+            if (slot.available) {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        // Vorherige Auswahl entfernen
+
+                        document
+                            .querySelectorAll(".time-slot")
+                            .forEach(slotButton => {
+
+                                slotButton
+                                    .classList
+                                    .remove("selected");
+
+                            });
+
+
+                        // Neue Auswahl markieren
+
+                        button
+                            .classList
+                            .add("selected");
+
+
+                        selectedTime =
+                            slot.time;
+
+
+                        updateSummary();
+
+                    }
+                );
 
             }
+
+
+            timeSlots.appendChild(
+                button
+            );
+
+        });
+
+
+    } catch (error) {
+
+        console.error(
+            "Fehler beim Laden:",
+            error
         );
 
 
-        timeSlots.appendChild(
-            button
-        );
+        timeSlots.innerHTML =
+            `
+            <p class="booking-placeholder">
+                Die Termine konnten nicht geladen werden.
+                Bitte versuche es erneut.
+            </p>
+            `;
 
     }
 
 }
 
 
-
-// ZUSAMMENFASSUNG
+// ======================================================
+// BUCHUNGS-ZUSAMMENFASSUNG
+// ======================================================
 
 function updateSummary() {
 
@@ -378,7 +333,6 @@ function updateSummary() {
             "Noch kein vollständiger Termin ausgewählt.";
 
         return;
-
     }
 
 
@@ -388,7 +342,7 @@ function updateSummary() {
 
     const formattedDate =
         new Date(
-            dateValue + "T12:00:00"
+            `${dateValue}T12:00:00`
         )
         .toLocaleDateString(
             "de-DE",
@@ -427,167 +381,288 @@ function updateSummary() {
 }
 
 
-
-// BUCHUNG SPEICHERN
+// ======================================================
+// BUCHUNG ABSCHICKEN
+// ======================================================
 
 bookingForm.addEventListener(
     "submit",
-    event => {
+    async event => {
 
         event.preventDefault();
 
 
-        const serviceKey =
+        const service =
             serviceSelect.value;
 
-        const dateValue =
+        const date =
             bookingDate.value;
 
+        const name =
+            customerName.value.trim();
+
+        const email =
+            customerEmail.value.trim();
+
+        const phone =
+            customerPhone.value.trim();
+
+
+        // Termin nicht vollständig
 
         if (
-            !serviceKey ||
-            !dateValue ||
+            !service ||
+            !date ||
             !selectedTime
         ) {
 
             alert(
-                "Bitte wähle Leistung, Datum und Uhrzeit aus."
+                "Bitte wähle zuerst eine Leistung, ein Datum und eine Uhrzeit aus."
             );
 
             return;
-
         }
 
 
-        const service =
-            services[serviceKey];
+        // Name prüfen
+
+        if (name.length < 2) {
+
+            alert(
+                "Bitte gib einen gültigen Namen ein."
+            );
+
+            return;
+        }
 
 
-        const bookings =
-            getBookings();
+        // E-Mail wird aktuell noch nicht in Supabase gespeichert.
+        // Wir prüfen sie trotzdem über das HTML-Formular.
+
+        if (!email) {
+
+            alert(
+                "Bitte gib deine E-Mail-Adresse ein."
+            );
+
+            return;
+        }
 
 
-        const stillAvailable =
-            !bookings
-                .filter(
-                    booking =>
-                        booking.date === dateValue
-                )
-                .some(
-                    booking =>
-                        overlaps(
-                            selectedTime,
-                            service.duration,
-                            booking
-                        )
+        // Telefonnummer grob prüfen
+
+        if (phone.length < 6) {
+
+            alert(
+                "Bitte gib eine gültige Telefonnummer ein."
+            );
+
+            return;
+        }
+
+
+        const submitButton =
+            bookingForm.querySelector(
+                'button[type="submit"]'
+            );
+
+
+        const oldButtonText =
+            submitButton.textContent;
+
+
+        submitButton.disabled =
+            true;
+
+        submitButton.textContent =
+            "Termin wird reserviert...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    BOOKING_API,
+                    {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify({
+
+                                service:
+                                    service,
+
+                                date:
+                                    date,
+
+                                time:
+                                    selectedTime,
+
+                                name:
+                                    name,
+
+                                phone:
+                                    phone
+
+                            })
+
+                    }
                 );
 
 
-        if (!stillAvailable) {
+            const data =
+                await response.json();
 
-            alert(
-                "Dieser Termin wurde bereits vergeben."
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.error ||
+                    "Der Termin konnte nicht reserviert werden."
+                );
+
+            }
+
+
+            // ==================================================
+            // ERFOLGREICH VORLÄUFIG RESERVIERT
+            // ==================================================
+
+            const chosenService =
+                services[service];
+
+
+            const formattedDate =
+                new Date(
+                    `${date}T12:00:00`
+                )
+                .toLocaleDateString(
+                    "de-DE",
+                    {
+                        weekday: "long",
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "numeric"
+                    }
+                );
+
+
+            successText.innerHTML =
+                `
+                <strong>
+                    ${chosenService.name}
+                </strong>
+
+                wurde am
+
+                <strong>
+                    ${formattedDate}
+                </strong>
+
+                um
+
+                <strong>
+                    ${selectedTime} Uhr
+                </strong>
+
+                vorläufig reserviert.
+
+                <br><br>
+
+                Als Nächstes wird die Telefonnummer
+                per SMS-Code bestätigt.
+                `;
+
+
+            bookingSuccess
+                .classList
+                .add("show");
+
+
+            // Formular zurücksetzen
+
+            bookingForm.reset();
+
+
+            serviceSelect.value =
+                "";
+
+            bookingDate.value =
+                "";
+
+            selectedTime =
+                null;
+
+
+            bookingSummary.textContent =
+                "Noch kein vollständiger Termin ausgewählt.";
+
+
+            timeSlots.innerHTML =
+                `
+                <p class="booking-placeholder">
+                    Termin wurde vorläufig reserviert.
+                </p>
+                `;
+
+
+            // Zur Bestätigung scrollen
+
+            bookingSuccess.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+
+        } catch (error) {
+
+            console.error(
+                "Buchungsfehler:",
+                error
             );
 
-            renderTimeSlots();
 
-            return;
+            alert(
+                error.message
+            );
+
+
+            // Falls jemand in der Zwischenzeit
+            // denselben Termin gebucht hat:
+            await loadAvailableSlots();
+
+
+        } finally {
+
+            submitButton.disabled =
+                false;
+
+            submitButton.textContent =
+                oldButtonText;
 
         }
-
-
-        const booking = {
-
-            id:
-                Date.now(),
-
-            service:
-                service.name,
-
-            price:
-                service.price,
-
-            duration:
-                service.duration,
-
-            date:
-                dateValue,
-
-            time:
-                selectedTime,
-
-            name:
-                document
-                    .getElementById("customerName")
-                    .value,
-
-            email:
-                document
-                    .getElementById("customerEmail")
-                    .value,
-
-            phone:
-                document
-                    .getElementById("customerPhone")
-                    .value
-
-        };
-
-
-        bookings.push(
-            booking
-        );
-
-
-        saveBookings(
-            bookings
-        );
-
-
-        successText.textContent =
-            `${booking.service} am ${booking.date} um ${booking.time} Uhr wurde gespeichert.`;
-
-
-        bookingSuccess.classList.add(
-            "show"
-        );
-
-
-        bookingForm.reset();
-
-
-        selectedTime =
-            null;
-
-
-        timeSlots.innerHTML =
-            `
-            <p class="booking-placeholder">
-                Termin erfolgreich gespeichert.
-            </p>
-            `;
-
-
-        bookingSummary.textContent =
-            "Noch kein Termin ausgewählt.";
-
-
-        bookingSuccess.scrollIntoView({
-            behavior: "smooth"
-        });
 
     }
 );
 
 
+// ======================================================
+// ÄNDERUNGEN BEOBACHTEN
+// ======================================================
 
 serviceSelect.addEventListener(
     "change",
-    renderTimeSlots
+    loadAvailableSlots
 );
 
 
 bookingDate.addEventListener(
     "change",
-    renderTimeSlots
+    loadAvailableSlots
 );
