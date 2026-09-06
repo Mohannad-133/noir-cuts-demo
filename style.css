@@ -107,7 +107,7 @@ section {
     display: flex;
     align-items: center;
 
-    gap: 34px;
+    gap: 24px;
 }
 
 
@@ -128,7 +128,7 @@ section {
 
 
 .nav-button {
-    margin-left: 35px;
+    margin-left: 20px;
 
     text-decoration: none;
 
@@ -255,18 +255,18 @@ section {
 
 
 h1 {
-    font-size: clamp(62px, 8.5vw, 125px);
+    font-size: clamp(62px, 8.5vw, 115px);
 
-    line-height: 0.88;
+    line-height: 0.98;
 
-    letter-spacing: -5px;
+    letter-spacing: -4px;
 
     margin-bottom: 34px;
 }
 
 
 h1 span {
-    color: #a7a7a7;
+    color: var(--accent);
 }
 
 
@@ -363,7 +363,7 @@ h1 span {
 
 
 .hero-features span {
-    color: #777;
+    color: var(--text-muted);
 
     font-size: 12px;
 }
@@ -1117,9 +1117,9 @@ button:focus-visible {
 
 
     h1 {
-        font-size: 64px;
-
-        letter-spacing: -3px;
+        font-size: 58px;
+        line-height: 1;
+        letter-spacing: -2px;
     }
 
 
