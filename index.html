@@ -7,123 +7,645 @@
 
     <title>NOIR CUTS | Barbershop Hamburg</title>
 
+    <meta
+        name="description"
+        content="NOIR CUTS – moderner Barbershop in Hamburg. Präzise Haarschnitte, Skin Fades und professionelle Bartpflege."
+    >
+
+    <meta name="theme-color" content="#0a0a0a">
+
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="style.css">
 </head>
 
+
 <body>
 
-    <header>
-        <div class="logo">NOIR CUTS</div>
+    <!-- Navigation -->
 
-        <nav>
-            <a href="#start">Start</a>
+    <header class="header">
+
+        <a href="#start" class="logo">
+            NOIR <span>CUTS</span>
+        </a>
+
+        <nav class="desktop-nav" aria-label="Hauptnavigation">
             <a href="#leistungen">Leistungen</a>
             <a href="#ueber-uns">Über uns</a>
+            <a href="#oeffnungszeiten">Öffnungszeiten</a>
             <a href="#kontakt">Kontakt</a>
         </nav>
+
+        <a href="#kontakt" class="nav-button">
+            Termin anfragen
+        </a>
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="Menü öffnen"
+            aria-expanded="false"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
     </header>
+
+
+    <!-- Mobile Navigation -->
+
+    <div class="mobile-menu" id="mobileMenu">
+
+        <a href="#leistungen">Leistungen</a>
+        <a href="#ueber-uns">Über uns</a>
+        <a href="#oeffnungszeiten">Öffnungszeiten</a>
+        <a href="#kontakt">Kontakt</a>
+
+    </div>
 
 
     <main>
 
+
+        <!-- HERO -->
+
         <section class="hero" id="start">
+
+            <div class="hero-overlay"></div>
+
             <div class="hero-content">
 
-                <p class="small-title">BARBERSHOP HAMBURG</p>
+                <p class="eyebrow">
+                    BARBERSHOP · HAMBURG
+                </p>
 
                 <h1>
                     Dein Style.<br>
-                    Dein Schnitt.
+                    <span>Dein Schnitt.</span>
                 </h1>
 
-                <p class="hero-text">
-                    Präzise Haarschnitte, moderne Fades und professionelle
-                    Bartpflege in entspannter Atmosphäre.
+                <p class="hero-description">
+                    Präzise Fades, klassische Schnitte und professionelle
+                    Bartpflege – individuell auf deinen Style abgestimmt.
                 </p>
 
-                <a class="button" href="#kontakt">
-                    Termin anfragen
-                </a>
+                <div class="hero-buttons">
+
+                    <a href="#kontakt" class="button button-primary">
+                        Termin anfragen
+                    </a>
+
+                    <a href="#leistungen" class="button button-secondary">
+                        Preise ansehen
+                    </a>
+
+                </div>
+
+
+                <div class="hero-features">
+
+                    <div>
+                        <strong>5★</strong>
+                        <span>Service</span>
+                    </div>
+
+                    <div>
+                        <strong>6 Tage</strong>
+                        <span>pro Woche geöffnet</span>
+                    </div>
+
+                    <div>
+                        <strong>100%</strong>
+                        <span>Style</span>
+                    </div>
+
+                </div>
 
             </div>
+
         </section>
 
 
-        <section id="leistungen">
 
-            <p class="small-title">UNSERE LEISTUNGEN</p>
+        <!-- LEISTUNGEN -->
 
-            <h2>Was wir anbieten</h2>
+        <section class="section" id="leistungen">
 
-            <div class="cards">
+            <div class="section-heading">
 
-                <div class="card">
+                <div>
+
+                    <p class="eyebrow">
+                        UNSERE LEISTUNGEN
+                    </p>
+
+                    <h2>
+                        Der richtige Schnitt<br>
+                        für deinen Style.
+                    </h2>
+
+                </div>
+
+                <p class="section-intro">
+                    Klare Preise, professionelle Beratung und präzise Arbeit.
+                    Keine komplizierten Pakete.
+                </p>
+
+            </div>
+
+
+            <div class="services-grid">
+
+
+                <article class="service-card">
+
+                    <div class="service-number">
+                        01
+                    </div>
+
                     <h3>Classic Cut</h3>
-                    <p>Klassischer Haarschnitt mit Beratung und Styling.</p>
-                    <strong>25 €</strong>
-                </div>
 
-                <div class="card">
+                    <p>
+                        Klassischer Herrenhaarschnitt inklusive Beratung,
+                        Konturen und Styling.
+                    </p>
+
+                    <div class="service-price">
+                        25 €
+                    </div>
+
+                </article>
+
+
+                <article class="service-card">
+
+                    <div class="service-number">
+                        02
+                    </div>
+
                     <h3>Skin Fade</h3>
-                    <p>Sauberer Fade mit präzisen Übergängen.</p>
-                    <strong>30 €</strong>
-                </div>
 
-                <div class="card">
+                    <p>
+                        Präziser Fade mit sauberen Übergängen und
+                        professionellem Finish.
+                    </p>
+
+                    <div class="service-price">
+                        30 €
+                    </div>
+
+                </article>
+
+
+                <article class="service-card">
+
+                    <div class="service-number">
+                        03
+                    </div>
+
                     <h3>Hair & Beard</h3>
-                    <p>Haarschnitt kombiniert mit professioneller Bartpflege.</p>
-                    <strong>40 €</strong>
-                </div>
+
+                    <p>
+                        Haarschnitt kombiniert mit Bartkonturen,
+                        Trimmen und Styling.
+                    </p>
+
+                    <div class="service-price">
+                        40 €
+                    </div>
+
+                </article>
+
+
+                <article class="service-card">
+
+                    <div class="service-number">
+                        04
+                    </div>
+
+                    <h3>Beard Styling</h3>
+
+                    <p>
+                        Professionelle Bartpflege mit sauberen
+                        Konturen und individuellem Styling.
+                    </p>
+
+                    <div class="service-price">
+                        18 €
+                    </div>
+
+                </article>
 
             </div>
 
         </section>
 
 
-        <section id="ueber-uns" class="about">
 
-            <div>
+        <!-- ABOUT -->
 
-                <p class="small-title">NOIR CUTS</p>
+        <section class="about" id="ueber-uns">
 
-                <h2>Mehr als nur ein Haarschnitt.</h2>
+            <div class="about-visual">
+
+                <div class="visual-box">
+
+                    <span>NC</span>
+
+                </div>
+
+            </div>
+
+
+            <div class="about-content">
+
+                <p class="eyebrow">
+                    ÜBER NOIR CUTS
+                </p>
+
+                <h2>
+                    Mehr als nur<br>
+                    ein Haarschnitt.
+                </h2>
 
                 <p>
                     Bei NOIR CUTS verbinden wir klassische Barber-Techniken
-                    mit modernen Styles. Unser Ziel ist ein Schnitt,
-                    der zu dir und deinem persönlichen Stil passt.
+                    mit modernen Styles. Jeder Schnitt beginnt mit einer
+                    persönlichen Beratung und endet erst, wenn jedes Detail sitzt.
+                </p>
+
+                <p>
+                    Egal ob klassischer Schnitt, moderner Fade oder Bartpflege:
+                    Dein Style steht im Mittelpunkt.
+                </p>
+
+
+                <div class="about-points">
+
+                    <div>
+                        <span>✓</span>
+                        Individuelle Beratung
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        Präzise Schnitte
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        Moderne Styles
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        Entspannte Atmosphäre
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- GALERIE -->
+
+        <section class="section gallery-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="eyebrow">
+                        UNSER STYLE
+                    </p>
+
+                    <h2>
+                        Precision in<br>
+                        every detail.
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="gallery">
+
+                <div class="gallery-item gallery-one">
+                    <span>FADE</span>
+                </div>
+
+                <div class="gallery-item gallery-two">
+                    <span>CLASSIC</span>
+                </div>
+
+                <div class="gallery-item gallery-three">
+                    <span>BEARD</span>
+                </div>
+
+            </div>
+
+            <p class="gallery-note">
+                Demo-Platzhalter – für ein echtes Kundenprojekt würden hier
+                eigene, lizenzierte Fotos des Betriebs eingesetzt.
+            </p>
+
+        </section>
+
+
+
+        <!-- ÖFFNUNGSZEITEN -->
+
+        <section class="hours-section" id="oeffnungszeiten">
+
+            <div>
+
+                <p class="eyebrow">
+                    BESUCH UNS
+                </p>
+
+                <h2>
+                    Öffnungszeiten
+                </h2>
+
+                <p class="hours-text">
+                    Komm spontan vorbei oder kontaktiere uns vorher
+                    für einen Termin.
+                </p>
+
+            </div>
+
+
+            <div class="hours">
+
+                <div>
+                    <span>Montag</span>
+                    <strong>10:00 – 19:00</strong>
+                </div>
+
+                <div>
+                    <span>Dienstag</span>
+                    <strong>10:00 – 19:00</strong>
+                </div>
+
+                <div>
+                    <span>Mittwoch</span>
+                    <strong>10:00 – 19:00</strong>
+                </div>
+
+                <div>
+                    <span>Donnerstag</span>
+                    <strong>10:00 – 20:00</strong>
+                </div>
+
+                <div>
+                    <span>Freitag</span>
+                    <strong>10:00 – 20:00</strong>
+                </div>
+
+                <div>
+                    <span>Samstag</span>
+                    <strong>10:00 – 18:00</strong>
+                </div>
+
+                <div class="closed">
+                    <span>Sonntag</span>
+                    <strong>Geschlossen</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- BEWERTUNGEN -->
+
+        <section class="section reviews">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="eyebrow">
+                        KUNDENSTIMMEN
+                    </p>
+
+                    <h2>
+                        Was unsere Kunden sagen.
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="reviews-grid">
+
+                <article>
+
+                    <div class="stars">
+                        ★★★★★
+                    </div>
+
+                    <p>
+                        „Sehr sauberer Fade und angenehme Atmosphäre.
+                        Genau so vorgestellt.“
+                    </p>
+
+                    <strong>
+                        – Demo-Bewertung
+                    </strong>
+
+                </article>
+
+
+                <article>
+
+                    <div class="stars">
+                        ★★★★★
+                    </div>
+
+                    <p>
+                        „Professionelle Beratung und wirklich präzise Arbeit.
+                        Komme gerne wieder.“
+                    </p>
+
+                    <strong>
+                        – Demo-Bewertung
+                    </strong>
+
+                </article>
+
+
+                <article>
+
+                    <div class="stars">
+                        ★★★★★
+                    </div>
+
+                    <p>
+                        „Moderner Laden, gute Beratung und sehr
+                        entspanntes Team.“
+                    </p>
+
+                    <strong>
+                        – Demo-Bewertung
+                    </strong>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- KONTAKT -->
+
+        <section class="contact-section" id="kontakt">
+
+            <div class="contact-content">
+
+                <p class="eyebrow">
+                    DEIN NÄCHSTER CUT
+                </p>
+
+                <h2>
+                    Bereit für deinen<br>
+                    nächsten Style?
+                </h2>
+
+                <p>
+                    Ruf uns an oder schreib uns eine E-Mail.
+                </p>
+
+
+                <div class="contact-buttons">
+
+                    <a
+                        href="tel:+494012345678"
+                        class="button button-primary"
+                    >
+                        040 12345678
+                    </a>
+
+                    <a
+                        href="mailto:kontakt@noircuts-demo.de"
+                        class="button button-secondary"
+                    >
+                        E-Mail schreiben
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="contact-details">
+
+                <div>
+
+                    <span>ADRESSE</span>
+
+                    <strong>
+                        Musterstraße 21<br>
+                        12345 Hamburg
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>TELEFON</span>
+
+                    <strong>
+                        040 12345678
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>E-MAIL</span>
+
+                    <strong>
+                        kontakt@noircuts-demo.de
+                    </strong>
+
+                </div>
+
+                <p class="demo-notice">
+                    Alle Kontaktdaten sind fiktiv und dienen ausschließlich
+                    als Demo.
                 </p>
 
             </div>
 
         </section>
 
-
-        <section id="kontakt">
-
-            <p class="small-title">KONTAKT</p>
-
-            <h2>Bereit für deinen nächsten Schnitt?</h2>
-
-            <div class="contact-box">
-
-                <p>📍 Hamburg</p>
-                <p>📞 040 12345678</p>
-                <p>✉️ kontakt@noircuts-demo.de</p>
-
-                <button id="contactButton">
-                    Termin anfragen
-                </button>
-
-            </div>
-
-        </section>
 
     </main>
 
 
+
+    <!-- FOOTER -->
+
     <footer>
-        <p>© 2026 NOIR CUTS — Demo-Projekt</p>
+
+        <div class="footer-main">
+
+            <div>
+
+                <div class="footer-logo">
+                    NOIR <span>CUTS</span>
+                </div>
+
+                <p>
+                    Barbershop Hamburg
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="#leistungen">Leistungen</a>
+                <a href="#ueber-uns">Über uns</a>
+                <a href="#kontakt">Kontakt</a>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="impressum.html">Impressum</a>
+                <a href="datenschutz.html">Datenschutz</a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © <span id="year"></span> NOIR CUTS
+            </span>
+
+            <span>
+                Portfolio-Demo · kein echtes Unternehmen
+            </span>
+
+        </div>
+
     </footer>
 
 

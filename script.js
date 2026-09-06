@@ -1,10 +1,37 @@
-const contactButton =
-    document.getElementById("contactButton");
+const menuButton = document.getElementById("menuButton");
+const mobileMenu = document.getElementById("mobileMenu");
 
-contactButton.addEventListener("click", function () {
+menuButton.addEventListener("click", () => {
 
-    alert(
-        "Dies ist eine Demo-Website. Hier könnte später ein echtes Buchungssystem geöffnet werden."
+    const isOpen =
+        mobileMenu.classList.toggle("open");
+
+    menuButton.setAttribute(
+        "aria-expanded",
+        isOpen
     );
 
 });
+
+
+const mobileLinks =
+    mobileMenu.querySelectorAll("a");
+
+mobileLinks.forEach((link) => {
+
+    link.addEventListener("click", () => {
+
+        mobileMenu.classList.remove("open");
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+    });
+
+});
+
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
