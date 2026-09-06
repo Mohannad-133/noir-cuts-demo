@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Termin buchen | NOIR CUTS</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+
+<body>
+
+    <header class="header">
+
+        <a href="index.html" class="logo">
+            NOIR <span>CUTS</span>
+        </a>
+
+        <a href="index.html" class="nav-button">
+            Zur Startseite
+        </a>
+
+    </header>
+
+
+    <main class="booking-page">
+
+        <section class="booking-header">
+
+            <p class="eyebrow">
+                ONLINE BUCHUNG
+            </p>
+
+            <h1>
+                Dein Termin.
+            </h1>
+
+            <p>
+                Wähle Leistung, Datum und eine freie Uhrzeit.
+            </p>
+
+        </section>
+
+
+        <section class="booking-grid">
+
+
+            <!-- LEISTUNG -->
+
+            <div class="booking-card">
+
+                <span class="booking-step">
+                    01
+                </span>
+
+                <h2>
+                    Leistung
+                </h2>
+
+                <label for="service">
+                    Service auswählen
+                </label>
+
+                <select id="service">
+
+                    <option value="">
+                        Bitte auswählen
+                    </option>
+
+                    <option value="classic">
+                        Classic Cut – 25 € – 30 Min.
+                    </option>
+
+                    <option value="fade">
+                        Skin Fade – 30 € – 45 Min.
+                    </option>
+
+                    <option value="hairbeard">
+                        Hair & Beard – 40 € – 60 Min.
+                    </option>
+
+                    <option value="beard">
+                        Beard Styling – 18 € – 30 Min.
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- DATUM -->
+
+            <div class="booking-card">
+
+                <span class="booking-step">
+                    02
+                </span>
+
+                <h2>
+                    Datum
+                </h2>
+
+                <label for="bookingDate">
+                    Tag auswählen
+                </label>
+
+                <input
+                    type="date"
+                    id="bookingDate"
+                >
+
+                <p class="booking-info">
+                    Sonntags geschlossen.
+                </p>
+
+            </div>
+
+
+            <!-- UHRZEIT -->
+
+            <div class="booking-card booking-times-card">
+
+                <span class="booking-step">
+                    03
+                </span>
+
+                <h2>
+                    Uhrzeit
+                </h2>
+
+                <div
+                    class="time-slots"
+                    id="timeSlots"
+                >
+
+                    <p class="booking-placeholder">
+                        Wähle zuerst eine Leistung und ein Datum.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- DATEN -->
+
+            <div class="booking-card">
+
+                <span class="booking-step">
+                    04
+                </span>
+
+                <h2>
+                    Deine Daten
+                </h2>
+
+                <form id="bookingForm">
+
+                    <label for="customerName">
+                        Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="customerName"
+                        required
+                    >
+
+
+                    <label for="customerEmail">
+                        E-Mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="customerEmail"
+                        required
+                    >
+
+
+                    <label for="customerPhone">
+                        Telefonnummer
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="customerPhone"
+                        required
+                    >
+
+
+                    <div class="booking-summary" id="bookingSummary">
+
+                        Noch kein Termin ausgewählt.
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="button button-primary booking-submit"
+                    >
+                        Termin verbindlich buchen
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <section
+            class="booking-success"
+            id="bookingSuccess"
+        >
+
+            <h2>
+                Termin gebucht ✓
+            </h2>
+
+            <p id="successText"></p>
+
+            <a
+                href="index.html"
+                class="button button-secondary"
+            >
+                Zur Startseite
+            </a>
+
+        </section>
+
+
+        <p class="booking-demo-warning">
+
+            Demo-Buchungssystem:
+            Termine werden nur lokal in diesem Browser gespeichert.
+
+        </p>
+
+    </main>
+
+
+    <script src="booking.js"></script>
+
+</body>
+
+</html>
