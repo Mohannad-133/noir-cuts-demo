@@ -2025,3 +2025,65 @@ button:focus-visible {
     }
 
 }
+/* =====================================================
+   FOOTER ADMIN LINK
+===================================================== */
+
+.footer-bottom-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+
+.admin-footer-link {
+    color: #555;
+    text-decoration: none;
+    font-size: 11px;
+    transition: 0.2s;
+}
+
+
+.admin-footer-link:hover {
+    color: #aaa;
+}
+
+
+.booking-footer {
+    max-width: 1300px;
+    margin: 0 auto;
+
+    padding: 20px 5% 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    color: #555;
+
+    font-size: 11px;
+}
+
+
+.booking-footer a {
+    color: #555;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+
+.booking-footer a:hover {
+    color: #aaa;
+}
+
+
+@media (max-width: 650px) {
+
+    .footer-bottom-links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+}
