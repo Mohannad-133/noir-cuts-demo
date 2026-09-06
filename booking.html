@@ -3,23 +3,42 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Termin buchen | NOIR CUTS</title>
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <link
+        rel="icon"
+        href="favicon.svg"
+        type="image/svg+xml"
+    >
 </head>
+
 
 <body>
 
     <header class="header">
 
-        <a href="index.html" class="logo">
+        <a
+            href="index.html"
+            class="logo"
+        >
             NOIR <span>CUTS</span>
         </a>
 
-        <a href="index.html" class="nav-button">
+        <a
+            href="index.html"
+            class="nav-button"
+        >
             Zur Startseite
         </a>
 
@@ -27,6 +46,9 @@
 
 
     <main class="booking-page">
+
+
+        <!-- ÜBERSCHRIFT -->
 
         <section class="booking-header">
 
@@ -39,16 +61,20 @@
             </h1>
 
             <p>
-                Wähle Leistung, Datum und eine freie Uhrzeit.
+                Wähle eine Leistung, ein Datum
+                und eine freie Uhrzeit.
             </p>
 
         </section>
 
 
+
+        <!-- BUCHUNG -->
+
         <section class="booking-grid">
 
 
-            <!-- LEISTUNG -->
+            <!-- 1. LEISTUNG -->
 
             <div class="booking-card">
 
@@ -91,7 +117,8 @@
             </div>
 
 
-            <!-- DATUM -->
+
+            <!-- 2. DATUM -->
 
             <div class="booking-card">
 
@@ -114,12 +141,15 @@
 
                 <p class="booking-info">
                     Sonntags geschlossen.
+                    Buchungen sind maximal
+                    30 Tage im Voraus möglich.
                 </p>
 
             </div>
 
 
-            <!-- UHRZEIT -->
+
+            <!-- 3. UHRZEIT -->
 
             <div class="booking-card booking-times-card">
 
@@ -137,7 +167,8 @@
                 >
 
                     <p class="booking-placeholder">
-                        Wähle zuerst eine Leistung und ein Datum.
+                        Wähle zuerst eine Leistung
+                        und ein Datum.
                     </p>
 
                 </div>
@@ -145,7 +176,8 @@
             </div>
 
 
-            <!-- DATEN -->
+
+            <!-- 4. KUNDENDATEN -->
 
             <div class="booking-card">
 
@@ -157,7 +189,9 @@
                     Deine Daten
                 </h2>
 
+
                 <form id="bookingForm">
+
 
                     <label for="customerName">
                         Name
@@ -192,9 +226,13 @@
                     >
 
 
-                    <div class="booking-summary" id="bookingSummary">
+                    <div
+                        class="booking-summary"
+                        id="bookingSummary"
+                    >
 
-                        Noch kein Termin ausgewählt.
+                        Noch kein vollständiger
+                        Termin ausgewählt.
 
                     </div>
 
@@ -203,7 +241,7 @@
                         type="submit"
                         class="button button-primary booking-submit"
                     >
-                        Termin verbindlich buchen
+                        Termin buchen
                     </button>
 
                 </form>
@@ -212,6 +250,9 @@
 
         </section>
 
+
+
+        <!-- ERFOLGREICHE BUCHUNG -->
 
         <section
             class="booking-success"
@@ -234,12 +275,19 @@
         </section>
 
 
+
+        <!-- DEMO HINWEIS -->
+
         <p class="booking-demo-warning">
 
-            Demo-Buchungssystem:
-            Termine werden nur lokal in diesem Browser gespeichert.
+            Demo-Projekt:
+            Die Buchungen werden in einer gemeinsamen
+            Demo-Datenbank gespeichert.
+            Die angegebenen Kontaktdaten werden
+            nicht per SMS verifiziert.
 
         </p>
+
 
     </main>
 
