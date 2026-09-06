@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Terminverwaltung | NOIR CUTS</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <link
+        rel="icon"
+        href="favicon.svg"
+        type="image/svg+xml"
+    >
+
+</head>
+
+
+<body>
+
+
+    <header class="header">
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+            NOIR <span>CUTS</span>
+        </a>
+
+        <a
+            href="index.html"
+            class="nav-button"
+        >
+            Zur Website
+        </a>
+
+    </header>
+
+
+
+    <main class="admin-page">
+
+
+        <!-- LOGIN -->
+
+        <section
+            class="admin-login"
+            id="adminLogin"
+        >
+
+            <p class="eyebrow">
+                NOIR CUTS
+            </p>
+
+            <h1>
+                Admin.
+            </h1>
+
+            <p class="admin-login-text">
+                Melde dich an, um Termine
+                zu verwalten.
+            </p>
+
+
+            <div class="admin-login-box">
+
+                <label for="adminPassword">
+                    Admin-Passwort
+                </label>
+
+                <input
+                    type="password"
+                    id="adminPassword"
+                    placeholder="Passwort eingeben"
+                >
+
+                <button
+                    type="button"
+                    class="button button-primary"
+                    id="loginButton"
+                >
+                    Anmelden
+                </button>
+
+
+                <p
+                    class="admin-error"
+                    id="loginError"
+                ></p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- DASHBOARD -->
+
+        <section
+            class="admin-dashboard hidden"
+            id="adminDashboard"
+        >
+
+
+            <div class="admin-dashboard-header">
+
+
+                <div>
+
+                    <p class="eyebrow">
+                        TERMINVERWALTUNG
+                    </p>
+
+                    <h1>
+                        Dashboard.
+                    </h1>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="admin-logout"
+                    id="logoutButton"
+                >
+                    Abmelden
+                </button>
+
+
+            </div>
+
+
+
+            <!-- STATISTIK -->
+
+            <div class="admin-stats">
+
+
+                <div class="admin-stat">
+
+                    <span>
+                        Heute
+                    </span>
+
+                    <strong
+                        id="todayCount"
+                    >
+                        0
+                    </strong>
+
+                    <small>
+                        bestätigte Termine
+                    </small>
+
+                </div>
+
+
+                <div class="admin-stat">
+
+                    <span>
+                        Kommend
+                    </span>
+
+                    <strong
+                        id="upcomingCount"
+                    >
+                        0
+                    </strong>
+
+                    <small>
+                        offene Termine
+                    </small>
+
+                </div>
+
+
+                <div class="admin-stat">
+
+                    <span>
+                        Erledigt
+                    </span>
+
+                    <strong
+                        id="completedCount"
+                    >
+                        0
+                    </strong>
+
+                    <small>
+                        Termine
+                    </small>
+
+                </div>
+
+
+                <div class="admin-stat">
+
+                    <span>
+                        Storniert
+                    </span>
+
+                    <strong
+                        id="cancelledCount"
+                    >
+                        0
+                    </strong>
+
+                    <small>
+                        Termine
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- FILTER -->
+
+            <div class="admin-controls">
+
+
+                <div>
+
+                    <label for="adminDateFilter">
+                        Termine ab
+                    </label>
+
+                    <input
+                        type="date"
+                        id="adminDateFilter"
+                    >
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="button button-secondary"
+                    id="refreshButton"
+                >
+                    Aktualisieren
+                </button>
+
+
+            </div>
+
+
+
+            <!-- LADEANZEIGE -->
+
+            <div
+                class="admin-loading"
+                id="adminLoading"
+            >
+                Termine werden geladen...
+            </div>
+
+
+
+            <!-- TERMINE -->
+
+            <div
+                class="appointments-list"
+                id="appointmentsList"
+            ></div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <script src="admin.js"></script>
+
+</body>
+
+</html>
